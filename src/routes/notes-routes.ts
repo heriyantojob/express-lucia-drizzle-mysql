@@ -13,17 +13,16 @@ import {
 } from "../lib/validator-functions.js";
 
 const notesRouter = Router();
-
-notesRouter.get("/:id", validateIdParam(), getNote);
-notesRouter.get("/", getAllNotes);
-notesRouter.post("/", validateNoteBody(), validateNoteTitle(), addNote);
+notesRouter.get("/get-note/:id", validateIdParam(), getNote);
+notesRouter.get("/get-all-notes", getAllNotes);
+notesRouter.post("/add-note", validateNoteBody(), validateNoteTitle(), addNote);
 notesRouter.put(
-  "/:id",
+  "/update-note/:id",
   validateIdParam(),
   validateNoteBody(),
   validateNoteTitle(),
   updateNote
 );
-notesRouter.delete("/:id", validateIdParam(), deleteNote);
+notesRouter.delete("/delete-note/:id", validateIdParam(), deleteNote);
 
 export default notesRouter;

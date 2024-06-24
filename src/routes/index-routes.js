@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import noteRoutes from '@/routes/notes-routes';
+import request from "supertest";
 import {
  login
 } from "../handlers/auth/loginHandler";
 import { lucia } from '@/lib/lucia';
 import { logout } from '@/handlers/auth/logoutHandler';
+import testRoutes from './test-routes';
+import authRouter from './auth-routes';
 const router = Router();
 
 //check login
@@ -28,14 +31,9 @@ router.use(async (req, res, next) => {
 	res.locals.user = user;
 	return next();
 });
-router.get('/', (req, res) => {
-  if (res.locals.user) {
-		
-    return res.send(res.locals.user);
-	}
-  return res.send('Hello from TypeScript!');
-});
-router.post('/login', login);
-router.post('/logout', logout);
+
+
 router.use('/notes', noteRoutes);
+router.use('/', authRouter);
+// router.use('/test', testRoutes);
 export default router;
