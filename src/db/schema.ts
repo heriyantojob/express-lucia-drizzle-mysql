@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { mysqlTable,binary, int, text,varchar,datetime,tinyint } from "drizzle-orm/mysql-core";
+import { mysqlTable,binary, int, text,varchar,datetime,tinyint, timestamp } from "drizzle-orm/mysql-core";
 
 export const NotesTable = mysqlTable("note", {
   id: int("id").autoincrement().primaryKey(),
@@ -29,6 +29,12 @@ export const users = mysqlTable("user", {
   deleted_at: datetime('deleted_at',{ mode: 'date' }),
 })
 
+export const emailVerificationTable = mysqlTable("email_verification", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  userId: varchar("user_id", { length: 255 }).notNull().references(() => users.id),
+  code: text("code").notNull(),
+  sentAt: timestamp("sent_at").notNull(),
+})
 export const sessions = mysqlTable("session", {
   id: varchar("id", {
 		length: 255

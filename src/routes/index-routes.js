@@ -31,7 +31,9 @@ router.use(async (req, res, next) => {
 	res.locals.user = user;
 	return next();
 });
-
+authRouter.get('/', (req, res) => {
+    res.send("helo wolrd");
+});
 
 router.use('/notes', noteRoutes);
 router.use('/', authRouter);
