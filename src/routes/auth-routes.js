@@ -2,11 +2,11 @@ import { Router } from "express";
 import { v7 as uuid } from 'uuid';
 import {
     login
-} from "../handlers/auth/loginHandler";
-import { logout } from '@/handlers/auth/logoutHandler';
+} from "../controllers/auth/loginController";
+import { logout } from '@/controllers/auth/logoutController';
 import userMiddleware from "../middleware/userMiddleware";
 import { generateIdFromEntropySize } from "lucia";
-import { register } from "@/handlers/auth/registerHandler";
+import { register } from "@/controllers/auth/registerController";
 const authRouter = Router();
 authRouter.post('/login', login);
 authRouter.post('/logout', logout);
@@ -16,7 +16,7 @@ authRouter.use('/protect', userMiddleware, (req, res) => {
 });
 
 authRouter.get('/generate-id', (req, res) => {
-    //res.send(generateIdFromEntropySize(10));
+    res.send(generateIdFromEntropySize(2));
 	res.send(uuid());
 	
 });

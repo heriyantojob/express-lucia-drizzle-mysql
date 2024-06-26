@@ -1,12 +1,8 @@
 import { Router } from 'express';
 import noteRoutes from '@/routes/notes-routes';
-import request from "supertest";
-import {
- login
-} from "../handlers/auth/loginHandler";
+
 import { lucia } from '@/lib/lucia';
-import { logout } from '@/handlers/auth/logoutHandler';
-import testRoutes from './test-routes';
+
 import authRouter from './auth-routes';
 const router = Router();
 

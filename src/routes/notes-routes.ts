@@ -5,7 +5,7 @@ import {
   getAllNotes,
   getNote,
   updateNote,
-} from "../handlers/notes";
+} from "../controllers/notes";
 import {
   validateIdParam,
   validateNoteBody,
