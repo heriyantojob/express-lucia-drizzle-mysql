@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-
+import * as schema from './schema';
 // Load environment variables from .env file
 dotenv.config();
 
@@ -14,5 +14,5 @@ if (!process.env.DB_URL) {
 const poolConnection = mysql.createPool(process.env.DB_URL);
 
 // Initialize Drizzle ORM with the connection pool
-export const db = drizzle(poolConnection);
+export const db = drizzle(poolConnection,{ schema,mode:"default" });
 
